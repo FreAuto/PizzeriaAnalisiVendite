@@ -1,0 +1,46 @@
+MISURE DAX – Pizzeria Dashboard 🍕
+Tabella: vendite (una riga = una pizza venduta in un ordine)
+
+Ricavi =
+    SUM ( vendite[ricavo] )
+    formato: "$"#,##0
+
+Pizze Vendute =
+    SUM ( vendite[quantita] )
+    formato: #,##0
+
+N Ordini =
+    DISTINCTCOUNT ( vendite[id_ordine] )
+    formato: #,##0
+
+Scontrino Medio =
+    DIVIDE ( [Ricavi], [N Ordini] )
+    formato: "$"#,##0.00
+
+Pizze per Ordine =
+    DIVIDE ( [Pizze Vendute], [N Ordini] )
+    formato: 0.00
+
+Giorni Aperti =
+    DISTINCTCOUNT ( vendite[data] )
+    formato: 0
+
+Ordini al Giorno =
+    DIVIDE ( [N Ordini], [Giorni Aperti] )
+    formato: 0.0
+
+Pizze al Giorno =
+    DIVIDE ( [Pizze Vendute], [Giorni Aperti] )
+    formato: 0.0
+
+Ricavi al Giorno =
+    DIVIDE ( [Ricavi], [Giorni Aperti] )
+    formato: "$"#,##0
+
+Prezzo Medio =
+    DIVIDE ( [Ricavi], [Pizze Vendute] )
+    formato: "$"#,##0.00
+
+Quota Ricavi =
+    DIVIDE ( [Ricavi], CALCULATE ( [Ricavi], ALLSELECTED ( vendite ) ) )
+    formato: 0.0%
