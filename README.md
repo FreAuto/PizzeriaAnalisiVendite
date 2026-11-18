@@ -1,5 +1,7 @@
 # 🍕 Le vendite di una pizzeria in un anno
 
+![Pizzeria](copertina.png)
+
 Progetto di **Francesco Autorino** – Data Analyst.
 
 🛠️ Strumenti: **Excel · Power BI** (Python solo per scaricare e pulire i dati)
@@ -78,19 +80,49 @@ pizzas, pizza_types
 
 ---
 
-## 📁 5. I file in questo repository
+## 📁 5. Tutti i file, uno per uno
+
+### 📄 Cartella principale
 
 | File | A cosa serve |
 |---|---|
 | `README.md` | Questo file |
-| `DESCRIZIONE_GITHUB.md` | Nome, descrizione e topics del repository |
-| `00_LEGGIMI.md` (in ogni cartella) | Una spiegazione corta di quella cartella |
+| `LEGGIMI.md` (in ogni cartella) | Una spiegazione corta di quella cartella |
+| `.gitignore` | I file da non caricare su GitHub |
 
-### 📂 01Excel
+### 📂 01RaccoltaDati
 
 | File | A cosa serve |
 |---|---|
-| `01_Pizzeria_Analisi.xlsx` | 📗 Il file Excel: 1.936 formule, 0 errori |
+| `01_scarica.py` | 📥 Scarica i 4 file CSV |
+| `02_pulizia.py` | 🧹 Controlla, unisce, traduce e crea le tabelle pulite |
+
+### 📂 02Dati
+
+**❌ 1GrezziNonPuliti** – i 4 file originali, in inglese
+
+| File | Righe | Cosa contiene |
+|---|---|---|
+| `orders.csv` | 21.350 | Ogni ordine: data e ora |
+| `order_details.csv` | 48.620 | Ogni pizza dentro un ordine, con la quantità |
+| `pizzas.csv` | 96 | Ogni pizza in ogni taglia, con il prezzo |
+| `pizza_types.csv` | 32 | Nome, categoria e ingredienti delle 32 pizze |
+
+**✅ 2Puliti**
+
+| File | Righe | Cosa contiene |
+|---|---|---|
+| `righe.csv` | 48.620 | Ogni pizza venduta: data, ora, giorno, mese, pizza, categoria, taglia, prezzo, quantità, ricavo |
+| `ordini.csv` | 21.350 | Ogni ordine: data, ora, numero di pizze, totale, dimensione |
+| `pizze.csv` | 32 | Le pizze del menu con categoria e ingredienti |
+| `registro_pulizia.csv` | 6 | Il risultato di ogni passo della pulizia |
+
+### 📂 03Excel
+
+| File | A cosa serve |
+|---|---|
+| `Pizzeria_Analisi.xlsx` | 📗 Il file Excel: 1.936 formule, 0 errori |
+| `crea_excel.py` | 🛠️ Lo script che lo crea |
 
 📗 **I fogli del file Excel**
 
@@ -105,13 +137,17 @@ pizzas, pizza_types
 | Calendario | I 365 giorni: ordini, ricavi, giorni di chiusura; ricavi per mese, 2 grafici |
 | Ordini, Righe | I dati, in tabelle Excel con filtri |
 
-### 📂 02PowerBi
+### 📂 04PowerBi
 
 | File | A cosa serve |
 |---|---|
-| `01_PizzeriaDashboard.zip` | ⭐ **La dashboard**: estrai lo zip e apri `Pizzeria_Dashboard.pbip` con Power BI Desktop |
-| `02_Pizzeria_Dashboard.pdf` | 📄 La dashboard in PDF |
-| `03_misure_DAX.txt` | 🧮 Le 11 misure DAX |
+| `PizzeriaDashboard/Pizzeria_Dashboard.pbip` | ⭐ **La dashboard**: doppio clic per aprirla in Power BI Desktop |
+| `Pizzeria_Dashboard.pdf` | 📄 La dashboard in PDF |
+| `misure_DAX.txt` | 🧮 Le 11 misure DAX |
+| `tema_pizzeria.json` | 🎨 Il tema scuro pomodoro, formaggio e basilico (già applicato) |
+| `Immagini/sfondo_pagina.png` | Lo sfondo con la barra laterale e la pizza, disegnato da zero |
+| `Script/crea_powerbi.py` | Crea una copia della dashboard (`PizzeriaDashboardBase`) |
+| `Script/crea_immagini.py` | Disegna lo sfondo |
 
 📊 **Le 5 pagine della dashboard**
 
@@ -125,13 +161,16 @@ pizzas, pizza_types
 
 ---
 
-## 📦 6. Dati e script
+## ▶️ 6. Come rifare tutto
 
-📌 Qui ci sono solo i **risultati**: analisi, query, notebook, file Excel e dashboard.
+```bash
+pip install pandas openpyxl pillow
+cd 01RaccoltaDati && python 01_scarica.py && python 02_pulizia.py
+cd ../03Excel && python crea_excel.py
+cd ../04PowerBi && python Script/crea_immagini.py && python Script/crea_powerbi.py
+```
 
-📥 I dati si possono riscaricare dalla fonte (link più sotto).
-
-🐍 Gli script Python di raccolta e pulizia dei dati sono disponibili su richiesta.
+💡 Aprendo la dashboard la prima volta, clicca **Aggiorna adesso** sulla barra gialla.
 
 ---
 
@@ -187,6 +226,6 @@ pizzas, pizza_types
 
 7️⃣ **Power BI**: dashboard di 5 pagine con tema scuro e filtri nella barra laterale, aperta e controllata in Power BI Desktop.
 
-8️⃣ **PDF**: esportata la dashboard in `02_Pizzeria_Dashboard.pdf`.
+8️⃣ **PDF**: esportata la dashboard in `Pizzeria_Dashboard.pdf`.
 
 9️⃣ **Conclusioni**: risposte alle domande e 4 azioni consigliate.
